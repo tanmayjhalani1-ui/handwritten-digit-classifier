@@ -1,3 +1,13 @@
+<div align="center">
+  <img src="assets/portfolio-banner.svg" alt="Handwritten Digit Recognition — Tanmay Jhalani" width="100%" />
+</div>
+
+<div align="center">
+  <strong>Designed and engineered by Tanmay Jhalani</strong> · <a href="https://github.com/tanmayjhalani1-ui">GitHub Profile</a>
+</div>
+
+---
+
 # Handwritten Digit Recognition
 
 A production-oriented MNIST digit-recognition application built with TensorFlow/Keras. It compares CNN architectures, tracks training runs with MLflow, serves predictions through Streamlit and FastAPI, and ships with Docker and GitHub Actions CI.
