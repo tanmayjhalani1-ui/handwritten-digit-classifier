@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile application
+        run: python -m compileall -q src api app.py
+      - name: Validate model architecture
+        run: |
+          python - <<'PY'
+          from src.train import build_model
+          for variant in ("cnn_v1", "cnn_v2"):
+              model = build_model(variant)
+              assert model.output_shape == (None, 10)
+              assert model.input_shape == (None, 28, 28, 1)
+              print(variant, model.count_params())
+          PY
